@@ -104,8 +104,7 @@ FROM netflix
 GROUP BY genre
 ORDER BY total_content DESC
 
--- 10.Find each year and the average numbers of content release in India on netflix. 
--- return top 5 year with highest avg content release!
+-- 10.Find each year and the average numbers of content release in India on netflix. return top 5 year with highest avg content release!
 
 SELECT
 	EXTRACT(YEAR FROM TO_DATE(date_added, 'Month, DD, YYYY')) AS year,
@@ -153,17 +152,15 @@ GROUP BY actors
 ORDER BY total_movies DESC
 LIMIT 10;
 
--- 15. Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
---the description field. Label content containing these keywords as 'Bad' and all other 
---content as 'Good'. Count how many items fall into each category.
+-- 15. Categorize the content based on the presence of the keywords 'kill' and 'violence' in the description field. Label content containing these keywords as 'Bad' and all other content as 'Good'. 
+-- Count how many items fall into each category.
 
 SELECT 
     category,
 	TYPE,
     COUNT(*) AS content_count
 FROM (
-    SELECT 
-		*,
+    SELECT *,
         CASE 
             WHEN description ILIKE '%kill%' OR description ILIKE '%violence%' THEN 'Bad'
             ELSE 'Good'
